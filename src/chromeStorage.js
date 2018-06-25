@@ -23,8 +23,8 @@ db.push = o => {
       .then(
         (
           pieceOfStore,
-          newData = pieceOfStore[key] ? pieceOfStore[key].concat(data) : [data]
-        ) => db.set({ [key]: newData }).then(resolve)
+          newArr = pieceOfStore[key] ? pieceOfStore[key].concat(data) : [data]
+        ) => db.set({ [key]: newArr }).then(resolve)
       )
   )
 }
