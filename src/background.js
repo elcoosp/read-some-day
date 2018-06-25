@@ -1,4 +1,6 @@
 import db from './chromeStorage.js'
+
+// Debugging purpose
 chrome.storage.sync.clear()
 
 const pickProps = (...props) => o =>
@@ -9,9 +11,6 @@ const pipe = (...fns) => init => fns.reduce((acc, f) => f(acc), init)
 chrome.browserAction.onClicked.addListener(
   pipe(
     pickProps('url', 'title', 'favIconUrl'),
-    data =>
-      db
-        .push({ readings: data })
-        .then(() => db.get('readings').then(console.log))
+    data => db.push({ readings: data })
   )
 )
