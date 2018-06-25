@@ -8,10 +8,10 @@ db.set = o =>
     })
   )
 
-db.get = x =>
+db.get = key =>
   new Promise((resolve, reject) =>
-    S.get(x, function(val) {
-      return resolve(val)
+    S.get(key, function(o) {
+      return resolve(o[key])
     })
   )
 
@@ -20,11 +20,8 @@ db.push = o => {
   return new Promise((resolve, reject) =>
     db
       .get(key)
-      .then(
-        (
-          pieceOfStore,
-          newArr = pieceOfStore[key] ? pieceOfStore[key].concat(data) : [data]
-        ) => db.set({ [key]: newArr }).then(resolve)
+      .then((prevData, newArr = (prevData ? prevData : []).concat(data)) =>
+        db.set({ [key]: newArr }).then(resolve)
       )
   )
 }
