@@ -12,6 +12,6 @@
   "browser_action": {
     "default_title": "Read some day"
   },
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "activeTab"],
   "version": "1.0"
 }
